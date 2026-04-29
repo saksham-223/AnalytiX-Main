@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnalytiX Code Analyzer</title>
+    <!-- Modern Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="syncScroll()">
+
+<div class="app-container">
+    <header class="header">
+        <div class="logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+            <h1>AnalytiX <span>Compiler Engine</span></h1>
+        </div>
+        <div class="actions">
+            <!-- Font Scaling Controls -->
+            <button type="button" class="theme-toggle" style="font-weight: bold; font-family: var(--font-code);" onclick="changeFontSize(-1)" title="Decrease Font Size">A-</button>
+            <button type="button" class="theme-toggle" style="font-weight: bold; font-family: var(--font-code);" onclick="changeFontSize(1)" title="Increase Font Size">A+</button>
+            <div style="width: 1px; height: 20px; background: var(--panel-border); margin: 0 5px;"></div>
+            
+            <button type="button" class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <button type="button" class="btn-primary" onclick="analyze()">Run Analysis</button>
+        </div>
+    </header>
+
+    <main class="main-layout">
+        <!-- Editor Left Split -->
+        <section class="editor-section panel">
+            <div class="panel-header">
+                <h2>Source Code</h2>
+                <div class="status-indicator live">Live Auto-Analyze</div>
+            </div>
+            <div class="editor-container">
+                <div id="highlights" class="highlights"></div>
+                <textarea id="code" spellcheck="false" placeholder="// Write your C code here..." oninput="onTextChange()" onscroll="syncScroll()">#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10;
+    int b = 5;
+    
+    int result = a + b * 2; // Analysis engine handles logic
+    
+    return 0;
+}</textarea>
+            </div>
+        </section>
+
+        <!-- Output Right Split -->
+        <section class="output-section panel">
+            <div class="panel-header">
+                <h2>Compiler Output</h2>
+            </div>
+            <div class="output-container">
+                <pre id="output">Initialize code to see compilation results...</pre>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
